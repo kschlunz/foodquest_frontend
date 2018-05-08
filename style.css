@@ -1,3 +1,4 @@
+
 .item1 { grid-area: header; }
 .item2 { grid-area: menu; }
 .item3 { grid-area: main; }
@@ -39,4 +40,14 @@
 /* Add some padding inside the card container */
 .container {
     padding: 2px 16px;
+
+#map {
+  height: 50%;
+  width: 50%
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
 }
