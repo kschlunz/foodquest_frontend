@@ -59,15 +59,16 @@ ClickEventHandler.prototype.getPlaceInformation = function(placeId, map) {
   this.placesService.getDetails({placeId: placeId}, function(place, status) {
     if (status === 'OK') {
       console.log("im inside")
-      header = document.createElement("h1")
-      header.innerText = `name: ${place.name}, address: ${place.formatted_address} hours: ${place.opening_hours.weekday_text} latlong: ${place.geometry.location}`
-      header.addEventListener('click', (event)=> {
+
+
+      card.innerHTML = `<h2><center>${place.name}</center></h2><br></br><center> ${place.formatted_address}</center> <br></br><ul> hours: ${place.opening_hours.weekday_text}<ul/>`
+      card.addEventListener('click', (event)=> {
         map.setCenter(place.geometry.location)
+        map.zoom = 18
       })
-      document.body.append(header)
+
     }
   });
 }
 
 google.maps.event.addDomListener(window, 'load', initMap);
-
