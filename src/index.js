@@ -1,3 +1,4 @@
+
 let map;
 
 function initMap() {
@@ -69,3 +70,4 @@ ClickEventHandler.prototype.getPlaceInformation = function(placeId, map) {
 }
 
 google.maps.event.addDomListener(window, 'load', initMap);
+
