@@ -11,7 +11,8 @@ class Restaurant {
       this.address = place.address
       this.hours = place.hours
       this.location = place.location
-      this.user_id = place.user_id
+      this.user_id = place.user.id
+      this.id = place.id
       if (this.location) {
         this.location.lat = parseFloat(this.location.lat)
         this.location.lng = parseFloat(this.location.lng)
@@ -24,16 +25,9 @@ class Restaurant {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(this)
-    }).then(res => res.json()).then(console.log())
+    }).then(res => res.json()).then((res)=>{this.id = res.id})
   }
 
-  saveButtonClicked() {
-    let li = document.createElement("li")
-    li.setAttribute("id", `${this.name}`)
-    li.innerHTML = `${this.name}`
-    ul.appendChild(li)
-    li.addEventListener('click', createCardView)
-  }
 
   createSideBarItem() {
     if (!document.getElementById(`${this.name}`)) {
@@ -42,11 +36,27 @@ class Restaurant {
       li.innerHTML = `${this.name}`
       ul.appendChild(li)
       li.addEventListener('click', this.createCardView.bind(this))
+      let deleteButton = document.createElement("button")
+      deleteButton.innerText = "delete"
+      li.appendChild(deleteButton)
+      deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
     }
   }
 
-  createCardView() {
+  deleteRestaurant(event){
+    if (card){
+      card.remove()
+    }
     console.log(this)
+    console.log(`http:localhost:3000/api/v1/users/${this.user_id}/restaurants/${this.id}`)
+    fetch(`http:localhost:3000/api/v1/users/${this.user_id}/restaurants/${this.id}`, {
+      method: "DELETE",
+      headers: {"Content-Type": "application/json"}
+    })
+    .then( ()=> {event.target.parentNode.remove()})
+  }
+
+  createCardView() {
     map.setCenter(this.location)
     map.zoom = 18
     if (document.getElementById('card')) {
@@ -85,12 +95,16 @@ class Restaurant {
         li.setAttribute("id", `${this.name}`)
         li.innerHTML = `${this.name}`
         ul.appendChild(li)
+
+        let deleteButton = document.createElement("button")
+        deleteButton.innerText = "delete"
+        li.appendChild(deleteButton)
+        deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
         li.addEventListener('click', this.createCardView.bind(this))
       }
     }.bind(this))
 
     card.addEventListener('click', (event) => {
-      console.log(this)
       map.setCenter(this.location)
       map.zoom = 18
 
