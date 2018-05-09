@@ -5,6 +5,8 @@ class Restaurant {
       this.address = place.formatted_address
       this.hours = place.opening_hours.weekday_text
       this.location = place.geometry.location
+      this.want_to_visit = true
+      this.have_visited = false
       this.user_id = 1
     } else {
       this.name = place.name
@@ -13,6 +15,8 @@ class Restaurant {
       this.location = place.location
       this.user_id = place.user.id
       this.id = place.id
+      this.want_to_visit = place.want_to_visit
+      this.have_visited = place.have_visited
       if (this.location) {
         this.location.lat = parseFloat(this.location.lat)
         this.location.lng = parseFloat(this.location.lng)
@@ -58,7 +62,7 @@ class Restaurant {
       ul.appendChild(li)
       li.addEventListener('click', this.createCardView.bind(this))
       let deleteButton = document.createElement("button")
-      deleteButton.innerText = "delete"
+      deleteButton.innerText = "remove"
       li.appendChild(deleteButton)
       deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
     }
@@ -95,8 +99,8 @@ class Restaurant {
     let address = document.createElement("p")
     address.innerHTML = `<center>${this.address}</center><br>`
     let hoursList = document.createElement("ul")
-    let saveButton = document.createElement("button")
-    saveButton.innerText = "save"
+    let wantToGoHereButton = document.createElement("button")
+    wantToGoHereButton.innerText = "I want to go here"
     for (let day of this.hours) {
       let weekArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       let today = weekArray[new Date().getDay()]
@@ -107,13 +111,13 @@ class Restaurant {
       }
       hoursList.appendChild(dayLi)
     }
-    card.appendChild(saveButton)
+    card.appendChild(wantToGoHereButton)
     card.appendChild(nameHeader)
     card.appendChild(address)
     card.appendChild(hoursList)
 
     //add event listeners
-    saveButton.addEventListener('click', function(event) {
+    wantToGoHereButton.addEventListener('click', function(event) {
       if (!document.getElementById(`${this.name}`)) {
         this.sendToBackEnd()
         let li = document.createElement("li")
@@ -138,26 +142,3 @@ class Restaurant {
   }
 
 }
-
-
-
-
-
-
-
-
-//
-// marker = new google.maps.Marker({
-//   map: map,
-//   animation: google.maps.Animation.DROP,
-//   position: this.location
-// });
-// marker.addListener('click', toggleBounce);
-//
-// function toggleBounce() {
-//   if (marker.getAnimation() !== null) {
-//     marker.setAnimation(null);
-//   } else {
-//     marker.setAnimation(google.maps.Animation.BOUNCE);
-//   }
-// }

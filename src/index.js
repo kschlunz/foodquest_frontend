@@ -42,7 +42,7 @@ function makeMap(pos) {
     }
   }
   map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 18,
+      zoom: 12,
       center: pos,
       })
     //things here get called after the map gets loaded
@@ -57,7 +57,7 @@ function makeMap(pos) {
         for (let result of res) {
           restaurant = new Restaurant(result)
           restaurant.createSideBarItem()
-          restaurant.dropMarker()
+          setTimeout(restaurant.dropMarker.bind(restaurant), 1000)
         }
       })
   }
