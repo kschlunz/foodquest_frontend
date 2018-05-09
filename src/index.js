@@ -1,4 +1,3 @@
-
 let map;
 
 function initMap() {
@@ -56,15 +55,31 @@ ClickEventHandler.prototype.handleClick = function(event) {
 
 ClickEventHandler.prototype.getPlaceInformation = function(placeId, map) {
   var me = this;
-  this.placesService.getDetails({placeId: placeId}, function(place, status) {
+  this.placesService.getDetails({
+    placeId: placeId
+  }, function(place, status) {
     if (status === 'OK') {
       console.log("im inside")
 
-
       card.innerHTML = `<h2><center>${place.name}</center></h2><br></br><center> ${place.formatted_address}</center> <br></br><ul> hours: ${place.opening_hours.weekday_text}<ul/>`
-      card.addEventListener('click', (event)=> {
+
+
+      card.addEventListener('click', (event) => {
         map.setCenter(place.geometry.location)
         map.zoom = 18
+
+
+        if (!document.getElementById(`${place.name}`)) {
+          let li = document.createElement("li")
+          li.setAttribute("id", `${place.name}`)
+          li.innerHTML = `${place.name}`
+          ul.appendChild(li)
+          li.addEventListener('click', (event) => {
+            card.innerHTML = `<h2><center>${place.name}</center></h2><br></br><center> ${place.formatted_address}</center> <br></br><ul> hours: ${place.opening_hours.weekday_text}<ul/>`
+            map.setCenter(place.geometry.location)
+            map.zoom = 18
+          })
+        }
       })
 
     }
