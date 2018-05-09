@@ -47,6 +47,17 @@ function makeMap(pos){
   })
   //things here get called after the map gets loaded
   makeListeners()
+  makeSidebar()
+}
+function makeSidebar(){
+  fetch("http://localhost:3000/api/v1/users/1/restaurants")
+  .then(res=>res.json())
+  .then((res)=>{
+    for (let result of res){
+      restaurant = new Restaurant(result)
+      restaurant.createSideBarItem()
+    }
+  })
 }
 
 function makeListeners(){
