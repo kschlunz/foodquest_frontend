@@ -1,69 +1,67 @@
-let map;
+//global variables for ease of use
+//may move these inside classes
+let map
+let markers
+let bounds
+
+document.addEventListener("DOMContentLoaded", function(e) {
+  let jsFile = document.createElement("script")
+  jsFile.type = "text/javascript"
+  jsFile.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4WyhZwCUxnclM61INQrbBQt4MH2qFm0E&libraries=places&callback=initMap"
+  document.getElementsByTagName('head')[0].appendChild(jsFile)
+})
 
 function initMap() {
-  var myLatLng = {
-    lat: 40.7051928,
-    lng: -74.0138964
-  };
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 18,
-    center: myLatLng
-  });
-
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
+  let pos
+  if (navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+      //the browser supports geolocation and permission was given
+      pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      };
-      map.setCenter(pos);
+      }
+      makeMap(pos)
     }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
+      //the browser supports geolocation but they denied permission
+      makeMap(pos)
+    })
   } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
+    //the browser doesnt support geolocation
+    makeMap(pos)
   }
-  var clickHandler = new ClickEventHandler(map, origin);
 }
 
-let ClickEventHandler = function(map, origin) {
-  this.origin = origin;
-  this.map = map;
-  console.log(map)
-  this.placesService = new google.maps.places.PlacesService(map);
-  // // Listen for clicks on the map.
-  this.map.addListener('click', this.handleClick.bind(this));
-};
-
-ClickEventHandler.prototype.handleClick = function(event) {
-  console.log('You clicked on: ' + event.latLng);
-  // If the event has a placeId, use it.
-  if (event.placeId) {
-    console.log('You clicked on place:' + event.placeId);
-
-    // Calling e.stop() on the event prevents the default info window from
-    // showing.
-    // If you call stop here when there is no placeId you will prevent some
-    // other map click event handlers from receiving the event.
-    event.stop();
-    this.getPlaceInformation(event.placeId, map);
-  }
-};
-
-ClickEventHandler.prototype.getPlaceInformation = function(placeId, map) {
-  var me = this;
-  this.placesService.getDetails({
-    placeId: placeId
-  }, function(place, status) {
-    if (status === 'OK') {
-      console.log("im inside")
-      let restaurant = new Restaurant(place)
-      restaurant.createCardView()
+function makeMap(pos){
+  if (pos.lat){
+    //nothing
+  } else{
+    //if no pos, default to flatiron school
+    pos = {
+      lat: 40.7051928,
+      lng: -74.0138964
     }
-  });
+  }
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 18,
+    center: pos
+  })
+  //things here get called after the map gets loaded
+  makeListeners()
 }
 
-google.maps.event.addDomListener(window, 'load', initMap);
+function makeListeners(){
+  placesService = new google.maps.places.PlacesService(map);
+  console.log(map)
+  map.addListener("click", function(event){
+    //when clicking on a place
+    if (event.placeId){
+      event.stop()
+      placesService.getDetails({placeId: event.placeId}, function(place, status){
+        if (status === 'OK'){
+          let restaurant = new Restaurant(place)
+          restaurant.createCardView()
+        }
+      })
+    }
+  })
+}
