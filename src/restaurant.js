@@ -1,6 +1,6 @@
 class Restaurant {
   constructor(place) {
-    if (place.formatted_address){
+    if (place.formatted_address) {
       this.name = place.name
       this.address = place.formatted_address
       this.hours = place.opening_hours.weekday_text
@@ -20,12 +20,33 @@ class Restaurant {
     }
   }
 
-  sendToBackEnd(){
+  dropMarker() {
+    let marker = new google.maps.Marker({
+      map: map,
+      animation: google.maps.Animation.DROP,
+      position: this.location
+    });
+    marker.addListener('click', zoomIn.bind(this));
+
+    function zoomIn() {
+      console.log(this)
+      map.zoom = 18
+      this.createCardView()
+    }
+
+
+  }
+
+  sendToBackEnd() {
     fetch("http://localhost:3000/api/v1/users/1/restaurants", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(this)
-    }).then(res => res.json()).then((res)=>{this.id = res.id})
+    }).then(res => res.json()).then((res) => {
+      this.id = res.id
+    })
   }
 
 
@@ -43,17 +64,21 @@ class Restaurant {
     }
   }
 
-  deleteRestaurant(event){
-    if (card){
+  deleteRestaurant(event) {
+    if (card) {
       card.remove()
     }
     console.log(this)
     console.log(`http:localhost:3000/api/v1/users/${this.user_id}/restaurants/${this.id}`)
     fetch(`http:localhost:3000/api/v1/users/${this.user_id}/restaurants/${this.id}`, {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"}
-    })
-    .then( ()=> {event.target.parentNode.remove()})
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(() => {
+        event.target.parentNode.remove()
+      })
   }
 
   createCardView() {
@@ -113,3 +138,26 @@ class Restaurant {
   }
 
 }
+
+
+
+
+
+
+
+
+//
+// marker = new google.maps.Marker({
+//   map: map,
+//   animation: google.maps.Animation.DROP,
+//   position: this.location
+// });
+// marker.addListener('click', toggleBounce);
+//
+// function toggleBounce() {
+//   if (marker.getAnimation() !== null) {
+//     marker.setAnimation(null);
+//   } else {
+//     marker.setAnimation(google.maps.Animation.BOUNCE);
+//   }
+// }
