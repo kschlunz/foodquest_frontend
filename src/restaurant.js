@@ -44,7 +44,6 @@ class Restaurant {
     marker.addListener('click', zoomIn.bind(this));
 
     function zoomIn() {
-      console.log(this)
       map.zoom = 18
       this.createCardView()
     }
@@ -76,7 +75,6 @@ class Restaurant {
   }
 
   updateStatus(){
-    console.log(this)
     fetch(`http://localhost:3000/api/v1/users/1/restaurants/${this.id}`, {
       method: "PATCH",
       headers: {
@@ -86,7 +84,7 @@ class Restaurant {
         have_visited: this.have_visited,
         want_to_visit: this.want_to_visit
       })
-    }).then(res=> res.json()).then(console.log)
+    })
   }
 
 
