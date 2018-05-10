@@ -96,7 +96,7 @@ class Restaurant {
       let li = document.createElement("li")
       li.setAttribute("id", `${this.name}`)
       li.innerHTML = `${this.name}`
-      ul.appendChild(li)
+      this.have_visited ? document.getElementById('places-been-to').appendChild(li) : document.getElementById('places-want-to-go').appendChild(li)
       li.addEventListener('click', this.createCardView.bind(this))
       let deleteButton = document.createElement("button")
       deleteButton.innerText = "remove"
@@ -160,13 +160,13 @@ class Restaurant {
 
     //add event listeners
     wantToGoHereButton.addEventListener('click', function(event) {
-      if (!document.getElementById(`${this.name}`)) {
+      if (!document.getElementById(this.name)) {
         this.sendToBackEnd()
         this.dropMarker()
         let li = document.createElement("li")
-        li.setAttribute("id", `${this.name}`)
+        li.setAttribute("id", this.name)
         li.innerHTML = `${this.name}`
-        ul.appendChild(li)
+        document.getElementById('places-want-to-go').appendChild(li)
 
         let deleteButton = document.createElement("button")
         deleteButton.innerText = "delete"
@@ -174,6 +174,11 @@ class Restaurant {
         deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
         li.addEventListener('click', this.createCardView.bind(this))
       } else {
+        let listItem = document.getElementById(this.name)
+        listItem.remove()
+        let list = document.getElementById('places-want-to-go')
+        list.appendChild(listItem)
+
         this.removeMarker()
         this.want_to_visit = true
         this.have_visited = false
@@ -190,7 +195,7 @@ class Restaurant {
         let li = document.createElement("li")
         li.setAttribute("id", `${this.name}`)
         li.innerHTML = `${this.name}`
-        ul.appendChild(li)
+        document.getElementById('places-been-to').appendChild(li)
 
         let deleteButton = document.createElement("button")
         deleteButton.innerText = "delete"
@@ -198,6 +203,10 @@ class Restaurant {
         deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
         li.addEventListener('click', this.createCardView.bind(this))
       } else {
+        let listItem = document.getElementById(this.name)
+        listItem.remove()
+        let list = document.getElementById('places-been-to')
+        list.appendChild(listItem)
         this.removeMarker()
         this.want_to_visit = false
         this.have_visited = true

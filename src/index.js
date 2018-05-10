@@ -103,4 +103,17 @@ function makeListeners() {
       restaurant.createCardView()
     }
   })
+  //random button listeners
+  let randomBeenTo = document.getElementById('random-been-to')
+  randomBeenTo.addEventListener("click", function(event){
+    let list = document.getElementById("places-been-to")
+    let randomLi = list.children[Math.floor(Math.random() * list.children.length)]
+    randomLi.click()
+  })
+  let randomWantToGo = document.getElementById('random-want-to-go')
+  randomWantToGo.addEventListener("click", function(event){
+    let list = document.getElementById("places-want-to-go")
+    let randomLi = list.children[Math.floor(Math.random() * list.children.length)]
+    randomLi.click()
+  })
 }
