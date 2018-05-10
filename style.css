@@ -18,6 +18,10 @@
     padding: 2px 16px;
 }
 
+#search-box{
+  width:50%;
+}
+
 #map {
   height: 50%;
   width: 100%;
