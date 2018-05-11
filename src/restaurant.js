@@ -167,7 +167,7 @@ class Restaurant {
         document.getElementById('places-want-to-go').appendChild(li)
 
         let deleteButton = document.createElement("button")
-        deleteButton.innerText = "delete"
+        deleteButton.innerText = "remove"
         li.appendChild(deleteButton)
         deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
         li.addEventListener('click', this.createCardView.bind(this))
@@ -196,7 +196,7 @@ class Restaurant {
         document.getElementById('places-been-to').appendChild(li)
 
         let deleteButton = document.createElement("button")
-        deleteButton.innerText = "delete"
+        deleteButton.innerText = "remove"
         li.appendChild(deleteButton)
         deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
         li.addEventListener('click', this.createCardView.bind(this))
