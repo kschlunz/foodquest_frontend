@@ -98,6 +98,7 @@ class Restaurant {
       li.addEventListener('click', this.createCardView.bind(this))
       let deleteButton = document.createElement("button")
       deleteButton.innerText = "remove"
+      deleteButton.setAttribute("id", "remove")
       li.appendChild(deleteButton)
       deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
     }
@@ -169,6 +170,7 @@ class Restaurant {
         document.getElementById('places-want-to-go').appendChild(li)
 
         let deleteButton = document.createElement("button")
+        deleteButton.setAttribute("id", "remove")
         deleteButton.innerText = "remove"
         li.appendChild(deleteButton)
         deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
@@ -198,6 +200,7 @@ class Restaurant {
         document.getElementById('places-been-to').appendChild(li)
 
         let deleteButton = document.createElement("button")
+        deleteButton.setAttribute("id", "remove")
         deleteButton.innerText = "remove"
         li.appendChild(deleteButton)
         deleteButton.addEventListener("click", this.deleteRestaurant.bind(this))
