@@ -12,6 +12,56 @@ h2 {
 .random-want-to-go{
   padding: 500px;
 }
+
+.button1{
+
+      background-color: #008CBA; /* Green */
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+
+}
+
+#wantToGoHereButton{
+
+      background-color: #008CBA; /* Green */
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+}
+
+#beenHereButton{
+
+      background-color: #008CBA; /* Green */
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+}
+
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -19,6 +69,7 @@ h2 {
     border-radius: 5px;
     flex: 3;
     border: 1px solid blue;
+    font-size: 18px;
 }
 
 /* On mouse-over, add a deeper shadow */

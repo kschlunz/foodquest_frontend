@@ -131,15 +131,17 @@ class Restaurant {
     let card = document.createElement("div")
     card.setAttribute("id", "card")
     card.setAttribute("class", "card")
-    let nameHeader = document.createElement("h2")
+    let nameHeader = document.createElement("p")
     nameHeader.innerHTML = `<center>${this.name}</center><br>`
     let address = document.createElement("p")
     address.innerHTML = `<center>${this.address}</center><br>`
     let hoursList = document.createElement("ul")
     let wantToGoHereButton = document.createElement("button")
     wantToGoHereButton.innerText = "I want to go here"
+    wantToGoHereButton.setAttribute("id", "wantToGoHereButton")
     let beenHereButton = document.createElement("button")
     beenHereButton.innerText = "I have been here"
+    beenHereButton.setAttribute("id", "beenHereButton")
     for (let day of this.hours) {
       let weekArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       let today = weekArray[new Date().getDay()]
