@@ -104,10 +104,7 @@ class Restaurant {
   }
 
   deleteRestaurant(event) {
-    //if the div card is being displayed, remove it
-    if (card) {
-      card.remove()
-    }
+
     //remove the marker from the map
     this.removeMarker()
 
@@ -120,6 +117,10 @@ class Restaurant {
       .then(() => {
         event.target.parentNode.remove()
       })
+      //if the div card is being displayed, remove it
+      if (document.getElementById('card')) {
+        document.getElementById('card').remove()
+      }
   }
 
   createCardView() {
@@ -155,7 +156,7 @@ class Restaurant {
     card.appendChild(nameHeader)
     card.appendChild(address)
     card.appendChild(hoursList)
-
+    content.appendChild(card)
     //add event listeners
     wantToGoHereButton.addEventListener('click', function(event) {
       if (!document.getElementById(this.name)) {
@@ -218,7 +219,6 @@ class Restaurant {
       map.zoom = 18
 
     })
-    content.appendChild(card)
   }
 
 }
