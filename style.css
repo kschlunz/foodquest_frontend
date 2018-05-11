@@ -94,7 +94,10 @@ h2 {
     border-radius: 5px;
     flex: 3;
     border: 1px solid blue;
-    font-size: 18px;}
+    font-size: 18px;
+    -webkit-animation: animation 750ms linear both;
+    animation: animation 750ms linear both;
+  }
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
