@@ -1,4 +1,4 @@
-##Food Quest
+## Food Quest
 A restaurant discovery tool for foodies. This is the frontend implementation for the Food Quest Javascript project. Places information is pulled from the Google Places API. It uses a Rails server to persist information and transmit to our Javascript frontend.
 
 Back end repo here: https://github.com/MenuDevelopment/nycweb031218-mod3-foodquest-backend
@@ -16,7 +16,7 @@ Javascript, Google Maps API, Custom CSS
 
 
 ## Features
-The ability to customize markers and save places using Google Maps API. 
+The ability to customize markers and save places using Google Maps API.
 
 
 ## Contributors
