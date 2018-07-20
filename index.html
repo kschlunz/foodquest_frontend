@@ -1,37 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title></title>
-  </head>
-  <body>
-  <div class="grid-container">
 
-  <div class="item1">Nav Bar</div>
-  <div class="item2">User NAME</div>
-  <div class="item3">MAP
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title></title>
+</head>
 
-  </div>
-  <div class="item4">Right</div>
-  <div class="item5">
-    <div id="fotter" class="grid-item">
-      <div id="first-div">
+<body>
+  <header>
+
+ <div class="topcontainer">
+
+        <div class="animate one">
+            <span>F</span><span>o</span><span>o</span><span>d</span> &nbsp;
+            <span>Q</span><span>u</span><span>e</span><span>s</span><span>t</span>
+            <center><input class="search-box" type="text" id="search-box"></input>
+            </center>
+          </br>
+
+        </div>
+
+    </div>
+
+
+  </header>
+  <div class="flex-container">
+
+    <div id="sidebar" class="sidenav">
+      <center><h2> Places you want to go </h2></center>
+      <center><button id= "random-want-to-go" class="button1">Pick a random place</button></center><br></br>
+
+      <ul id="places-want-to-go">
+
+      </ul>
+      <br></br>
+      <br></br>
+      <center><h2> Places you've been to</h2></center>
+      <center><button id= "random-been-to" class="button1">Pick a random place</button></center><br></br>
+
+      <ul id="places-been-to">
+
+      </ul>
+    </div>
+    <div class="content" id="content">
+      <div id="map">
+
+      </div>
+
       <div id="card" class="card">
-    
-        <div class="container">
+
+      </div>
     </div>
-  </div>
-  </div>
-    </div>
-
-  </div>
-</div>
+</body>
 
 
 
-    <script src= "src/index.js"></script>
-    <script src= "src/adapter.js"></script>
-    <script src= "src/restaurant_card.js"></script>
-  </body>
+
+
+
+<script defer src="src/index.js"></script>
+<script src="src/adapter.js"></script>
+<script src="src/restaurant.js"></script>
+</body>
+
 </html>
